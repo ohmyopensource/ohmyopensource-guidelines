@@ -13,8 +13,6 @@ It collects all the conventions, standards and best practices we follow across o
 
 ## What's inside?
 
-> Coming soon
-
 | Section | Description |
 |---|---|
 | `git/` | Commit conventions, branching strategy, pull request guidelines |
