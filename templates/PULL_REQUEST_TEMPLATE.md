@@ -32,6 +32,7 @@
 
 ## Checklist
 
+- [ ] The PR targets the correct branch (`dev`, not `main`)
 - [ ] The branch is up to date with the target branch
 - [ ] All CI checks pass (tests, lint, build)
 - [ ] The PR addresses a single, well-defined task
