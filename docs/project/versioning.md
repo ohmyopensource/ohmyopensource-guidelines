@@ -1,4 +1,28 @@
-# Versioning
+---
+title: Versioning | OhMyOpenSource! Guidelines
+description: Semantic Versioning standards for OhMyOpenSource projects, including MAJOR.MINOR.PATCH rules, pre-releases, Git tags, and automated versioning strategies.
+head:
+  - - meta
+    - property: og:title
+      content: Versioning | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn how OhMyOpenSource applies Semantic Versioning (SemVer), Git tags, and automated versioning for consistent release management.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/versioning
+  - - meta
+    - name: keywords
+      content: semantic versioning, semver, versioning strategy, git tags, release versioning, pre-release versions, major minor patch, automated versioning, conventional commits versioning, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Versioning | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Semantic Versioning (SemVer) rules and release versioning strategy for OhMyOpenSource projects.
+---
+
+# OhMyOpenSource! - Versioning
 
 This document defines the versioning standard adopted across all repositories of the OhMyOpenSource! organization.
 
@@ -18,13 +42,13 @@ MAJOR.MINOR.PATCH
 
 Each component is a non-negative integer and must increase numerically:
 
-| Component | Incremented when | Example |
-|---|---|---|
-| `MAJOR` | A backward-incompatible (breaking) change is introduced | `1.4.2` => `2.0.0` |
-| `MINOR` | New backward-compatible functionality is added | `1.4.2` => `1.5.0` |
-| `PATCH` | A backward-compatible bug fix is made | `1.4.2` => `1.4.3` |
+| Component | Incremented when                                        | Example           |
+| --------- | ------------------------------------------------------- | ----------------- |
+| `MAJOR`   | A backward-incompatible (breaking) change is introduced | `1.4.2` > `2.0.0` |
+| `MINOR`   | New backward-compatible functionality is added          | `1.4.2` > `1.5.0` |
+| `PATCH`   | A backward-compatible bug fix is made                   | `1.4.2` > `1.4.3` |
 
-When `MAJOR` is incremented, `MINOR` and `PATCH` are reset to `0`.  
+When `MAJOR` is incremented, `MINOR` and `PATCH` are reset to `0`.
 When `MINOR` is incremented, `PATCH` is reset to `0`.
 
 ### The meaning of `0.y.z`
@@ -61,11 +85,11 @@ Pre-release versions may be denoted by appending a hyphen and identifiers after 
 
 Pre-release versions indicate that the release is not yet stable and may change before the final release. Common pre-release identifiers:
 
-| Identifier | Meaning |
-|---|---|
-| `alpha` | Early, unstable: likely incomplete, expect breaking changes |
-| `beta` | Feature complete but not fully tested: breaking changes unlikely but possible |
-| `rc` | Release candidate: intended as the final version unless critical issues are found |
+| Identifier | Meaning                                                                           |
+| ---------- | --------------------------------------------------------------------------------- |
+| `alpha`    | Early, unstable: likely incomplete, expect breaking changes                       |
+| `beta`     | Feature complete but not fully tested: breaking changes unlikely but possible     |
+| `rc`       | Release candidate: intended as the final version unless critical issues are found |
 
 Pre-release versions have lower precedence than the associated normal version: `1.0.0-rc.1 < 1.0.0`.
 
@@ -114,11 +138,11 @@ git push origin --tags
 
 The version bump for each release can be derived mechanically from the commit history, when [Conventional Commits](../git/commit-conventions.md) are used consistently:
 
-| Commit history contains | Version bump |
-|---|---|
+| Commit history contains                                       | Version bump                           |
+| ------------------------------------------------------------- | -------------------------------------- |
 | Any commit with `BREAKING CHANGE` in footer, or `!` in header | `MAJOR` (or `MINOR` if `MAJOR` is `0`) |
-| At least one `feat:` commit | `MINOR` |
-| Only `fix:`, `perf:`, `docs:`, `chore:`, etc. | `PATCH` |
+| At least one `feat:` commit                                   | `MINOR`                                |
+| Only `fix:`, `perf:`, `docs:`, `chore:`, etc.                 | `PATCH`                                |
 
 This is not just a convention, it enables **automated versioning**: tools can read the commit log since the last tag and determine the correct next version without human judgment.
 
@@ -168,7 +192,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # required: semantic-release needs full history
+          fetch-depth: 0 # required: semantic-release needs full history
 
       - uses: actions/setup-node@v4
         with:
@@ -179,7 +203,7 @@ jobs:
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}   # if publishing to npm
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # if publishing to npm
 ```
 
 With `semantic-release`, a merge to `main` is a release. There is no manual step.
@@ -191,6 +215,7 @@ With `semantic-release`, a merge to `main` is a release. There is no manual step
 For projects that manage releases manually, the process is as follows:
 
 **1. Cut a release branch** from `develop`:
+
 ```bash
 git checkout develop
 git pull origin develop
@@ -198,6 +223,7 @@ git checkout -b release/1.5.0
 ```
 
 **2. Bump the version** in the project manifest (`package.json`, `pyproject.toml`, etc.) and update `CHANGELOG.md`:
+
 ```bash
 # Update version in package.json
 npm version 1.5.0 --no-git-tag-version
@@ -209,6 +235,7 @@ git commit -am "build(release): bump version to 1.5.0"
 ```
 
 **3. Merge into `main`** via PR and tag the merge commit:
+
 ```bash
 git checkout main
 git merge --no-ff release/1.5.0
@@ -217,6 +244,7 @@ git push origin main --tags
 ```
 
 **4. Back-merge into `develop`**:
+
 ```bash
 git checkout develop
 git merge --no-ff release/1.5.0
@@ -228,17 +256,17 @@ git branch -d release/1.5.0
 
 ## Quick Reference
 
-| Rule | Requirement |
-|---|---|
-| Version format | `MAJOR.MINOR.PATCH` - SemVer 2.0.0 |
-| Tag format | `vMAJOR.MINOR.PATCH` (annotated, on `main` only) |
-| Breaking change | Increment `MAJOR`, reset `MINOR` and `PATCH` to `0` |
-| New feature | Increment `MINOR`, reset `PATCH` to `0` |
-| Bug fix | Increment `PATCH` |
-| `0.y.z` | Initial development - API not stable |
-| Pre-release | `1.0.0-alpha`, `1.0.0-beta.1`, `1.0.0-rc.1` |
-| Tags are immutable | Never move, delete or reuse a released tag |
-| CHANGELOG | Updated for every release, before tagging |
+| Rule               | Requirement                                         |
+| ------------------ | --------------------------------------------------- |
+| Version format     | `MAJOR.MINOR.PATCH` - SemVer 2.0.0                  |
+| Tag format         | `vMAJOR.MINOR.PATCH` (annotated, on `main` only)    |
+| Breaking change    | Increment `MAJOR`, reset `MINOR` and `PATCH` to `0` |
+| New feature        | Increment `MINOR`, reset `PATCH` to `0`             |
+| Bug fix            | Increment `PATCH`                                   |
+| `0.y.z`            | Initial development - API not stable                |
+| Pre-release        | `1.0.0-alpha`, `1.0.0-beta.1`, `1.0.0-rc.1`         |
+| Tags are immutable | Never move, delete or reuse a released tag          |
+| CHANGELOG          | Updated for every release, before tagging           |
 
 ---
 

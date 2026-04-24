@@ -1,13 +1,37 @@
-# Code Review
+---
+title: Code Review | OhMyOpenSource! Guidelines
+description: Code review guidelines for OhMyOpenSource projects, covering responsibilities, best practices, feedback style, and review standards.
+head:
+  - - meta
+    - property: og:title
+      content: Code Review | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn the code review standards used across OhMyOpenSource projects, including best practices, responsibilities, and effective feedback techniques.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/code-review
+  - - meta
+    - name: keywords
+      content: code review guidelines, open source code review, pull request review standards, code review best practices, developer collaboration, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Code Review | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Code review best practices and standards for OhMyOpenSource projects.
+---
 
-This document defines the standards and expectations for code review across all repositories of the OhMyOpenSource! organization.  
+# OhMyOpenSource! - Code Review
+
+This document defines the standards and expectations for code review across all repositories of the OhMyOpenSource! organization.
 Code review is not a quality gate, it is a collaborative practice. Its purpose is to improve code health over time, share knowledge across the team, and catch issues before they reach production.
 
 ---
 
 ## The Core Principle
 
-The goal of a code review is not to find a perfect solution, there is no such thing as perfect code, only *better* code. A reviewer should approve a change once it demonstrably improves the overall health of the codebase, even if it does not address every possible concern.
+The goal of a code review is not to find a perfect solution, there is no such thing as perfect code, only _better_ code. A reviewer should approve a change once it demonstrably improves the overall health of the codebase, even if it does not address every possible concern.
 
 This means: do not block a PR for things that are minor, stylistic, or speculative. Do block it for things that genuinely reduce correctness, maintainability, or clarity.
 
@@ -28,7 +52,7 @@ The author is responsible for submitting work that is ready to be reviewed, not 
 
 When a reviewer leaves a comment the author does not understand, the first step is to ask for clarification, not to ignore it or dismiss it. When a reviewer asks for a change, and the author disagrees, the appropriate response is to engage constructively, not defensively.
 
-If a reviewer points out something unclear in the code, the correct response is to **fix the code**, not to explain it in the PR comment thread. Explanations written in review threads are visible only to the people in that review,  they do not help future readers of the code.
+If a reviewer points out something unclear in the code, the correct response is to **fix the code**, not to explain it in the PR comment thread. Explanations written in review threads are visible only to the people in that review, they do not help future readers of the code.
 
 ### The Reviewer
 
@@ -36,7 +60,7 @@ The reviewer is responsible for understanding the change and providing timely, c
 
 - Reading the PR description before looking at the diff
 - Reviewing every line of human-written code, not skimming
-- Leaving comments that explain the *why*, not just the *what*
+- Leaving comments that explain the _why_, not just the _what_
 - Distinguishing between blocking concerns and optional suggestions
 - Responding within one business day
 
@@ -58,7 +82,7 @@ When reviewing a change, evaluate the following in roughly this order of importa
 
 **Naming**: Are variables, functions, classes and modules named clearly enough to communicate their purpose without requiring a comment?
 
-**Comments**: Do code comments explain *why* something exists, not *what* it does? If the code itself requires a comment to explain what it does, the code should be simplified first.
+**Comments**: Do code comments explain _why_ something exists, not _what_ it does? If the code itself requires a comment to explain what it does, the code should be simplified first.
 
 **Documentation**: If the change affects how the project is built, tested, deployed or used, has the relevant documentation been updated?
 
@@ -72,12 +96,12 @@ The tone and framing of a review comment matters as much as its content. A techn
 
 **Comment on the code, not the person.**
 
-| Avoid | Prefer |
-|---|---|
+| Avoid                         | Prefer                                                                                                               |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | "Why did you do it this way?" | "I'm not sure I follow the reasoning here, could you help me understand the intent, or add a comment explaining it?" |
-| "This is wrong." | "This approach could cause X in the case of Y. Would it make sense to handle that here?" |
-| "You should use a map here." | "A map might improve lookup time here since this runs on every request. What do you think?" |
-| "This is too complex." | "I'm finding this hard to follow, do you think we could simplify the logic, or break it into smaller functions?" |
+| "This is wrong."              | "This approach could cause X in the case of Y. Would it make sense to handle that here?"                             |
+| "You should use a map here."  | "A map might improve lookup time here since this runs on every request. What do you think?"                          |
+| "This is too complex."        | "I'm finding this hard to follow, do you think we could simplify the logic, or break it into smaller functions?"     |
 
 **Label comment severity** so the author can prioritize correctly:
 
@@ -87,6 +111,7 @@ The tone and framing of a review comment matters as much as its content. A techn
 - (no label) : a required change before the PR can be approved
 
 **Example comments:**
+
 ```
 Nit: this variable name could be more descriptive, `items` is a bit vague given the context.
 
@@ -105,11 +130,11 @@ Acknowledge good decisions too. If the author solved something elegantly or adde
 
 Slow reviews do not just delay individual PRs, they slow down the entire team and erode trust in the review process.
 
-| Situation | Expected response |
-|---|---|
-| PR assigned for review | First response within **1 business day** |
-| Author has addressed feedback | Re-review within **1 business day** |
-| Unable to review promptly | Communicate it, let the author know and suggest another reviewer |
+| Situation                     | Expected response                                                |
+| ----------------------------- | ---------------------------------------------------------------- |
+| PR assigned for review        | First response within **1 business day**                         |
+| Author has addressed feedback | Re-review within **1 business day**                              |
+| Unable to review promptly     | Communicate it, let the author know and suggest another reviewer |
 
 A response does not have to be a full review. Acknowledging the PR and providing an estimated timeline is always better than silence.
 
@@ -156,6 +181,7 @@ An approval does not require every comment to be resolved, only blocking ones. M
 ## Quick Reference
 
 **Reviewer checklist:**
+
 - [ ] Read the PR description before looking at the code
 - [ ] Review every line of human-written code
 - [ ] Evaluate design, functionality, complexity, tests, naming, comments, documentation
@@ -164,11 +190,12 @@ An approval does not require every comment to be resolved, only blocking ones. M
 - [ ] Respond within one business day
 
 **Author checklist:**
+
 - [ ] CI is green and all tests pass before requesting review
 - [ ] The PR description explains the problem and the solution
 - [ ] The diff has been self-reviewed
 - [ ] When a comment is unclear, ask for clarification before pushing back
-- [ ] Fix the code when asked to clarify — do not just explain in the thread
+- [ ] Fix the code when asked to clarify - do not just explain in the thread
 - [ ] Respond to feedback constructively, not defensively
 
 ---

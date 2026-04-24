@@ -1,6 +1,30 @@
-# Secrets Management
+---
+title: Secrets Management | OhMyOpenSource! Guidelines
+description: Rules and best practices for handling secrets across OhMyOpenSource repositories, including .env usage, CI/CD secrets, GitHub Actions, and incident response.
+head:
+  - - meta
+    - property: og:title
+      content: Secrets Management | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn how OhMyOpenSource securely manages secrets using .env files, GitHub Secrets, environment scoping, and automated scanning tools.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/secrets-management
+  - - meta
+    - name: keywords
+      content: secrets management, env files, environment variables security, git secrets policy, github actions secrets, api key security, credential rotation, dependency security, devsecops practices, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Secrets Management | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Best practices for managing secrets securely across development, CI/CD and production environments.
+---
 
-This document defines the rules and best practices for handling secrets across all repositories of the OhMyOpenSource! organization.  
+# OhMyOpenSource! - Secrets Management
+
+This document defines the rules and best practices for handling secrets across all repositories of the OhMyOpenSource! organization.
 A secret is any piece of sensitive information that, if exposed, could compromise the security of a system or its users. This includes API keys, database credentials, authentication tokens, private certificates, and any other value that grants access to a resource.
 
 ---
@@ -37,7 +61,7 @@ If in doubt, treat it as a secret.
 The standard approach for managing secrets in local development is the `.env` file: a plain text file that stores environment variables in `KEY=value` format, loaded at runtime by the application and never committed to version control.
 
 ```dotenv
-# Example .env file — never commit this
+# Example .env file - never commit this
 DATABASE_URL=postgres://user:password@localhost:5432/myapp
 API_KEY=a1b2c3d4e5f6g7h8
 STRIPE_SECRET_KEY=sk_live_...
@@ -51,7 +75,7 @@ JWT_SECRET=my-very-secret-key
 - A `.env.example` (or `.env.sample`) file **must** be committed instead, containing all required variable names with empty or dummy values
 
 ```dotenv
-# .env.example — commit this, not .env
+# .env.example - commit this, not .env
 DATABASE_URL=
 API_KEY=
 STRIPE_SECRET_KEY=
@@ -124,7 +148,7 @@ For automated workflows, secrets must be stored as **GitHub Actions Secrets**, n
 ### How to add a secret
 
 1. Go to the repository on GitHub
-2. Navigate to **Settings** => **Secrets and variables** => **Actions**
+2. Navigate to **Settings** > **Secrets and variables** > **Actions**
 3. Click **New repository secret**
 4. Enter the name (e.g. `STRIPE_SECRET_KEY`) and value
 5. Save - the value will never be visible again after creation
@@ -133,7 +157,7 @@ For secrets shared across multiple repositories within the organization, use **o
 
 ### How to use secrets in a workflow
 
-Reference secrets with `${{ secrets.SECRET_NAME }}` — they are automatically masked in logs.
+Reference secrets with <span v-pre>`${{ secrets.SECRET_NAME }}`</span> - they are automatically masked in logs.
 
 ```yaml
 name: Deploy
@@ -183,7 +207,7 @@ jobs:
 
 For projects with multiple deployment targets (development, staging, production), use **GitHub Environments** to scope secrets to the appropriate context:
 
-1. Go to **Settings** => **Environments**
+1. Go to **Settings** > **Environments**
 2. Create environments (e.g. `production`, `staging`)
 3. Add secrets scoped to each environment
 4. Reference them in the workflow with the `environment` key:
@@ -196,7 +220,7 @@ jobs:
     steps:
       - name: Deploy
         env:
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}  # production-scoped
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }} # production-scoped
         run: ./deploy.sh
 ```
 
@@ -257,15 +281,15 @@ Every secret should grant only the minimum permissions required for its purpose.
 
 ## Summary: What to Do and What Not to Do
 
-| Do | Do not |
-|---|---|
+| Do                                         | Do not                                                |
+| ------------------------------------------ | ----------------------------------------------------- |
 | Store secrets in `.env`, excluded from Git | Commit `.env` or any file containing real credentials |
-| Commit `.env.example` with empty values | Use `git add .` without checking what is staged |
-| Use GitHub Secrets for CI/CD | Hardcode secrets in workflow YAML files |
-| Scope secrets to environments and steps | Share a single key across multiple environments |
-| Rotate secrets regularly | Leave unused or expired keys active |
-| Revoke immediately if exposed | Rely on commit deletion to hide an exposed secret |
-| Use automated scanning tools | Trust manual code review alone to catch secrets |
+| Commit `.env.example` with empty values    | Use `git add .` without checking what is staged       |
+| Use GitHub Secrets for CI/CD               | Hardcode secrets in workflow YAML files               |
+| Scope secrets to environments and steps    | Share a single key across multiple environments       |
+| Rotate secrets regularly                   | Leave unused or expired keys active                   |
+| Revoke immediately if exposed              | Rely on commit deletion to hide an exposed secret     |
+| Use automated scanning tools               | Trust manual code review alone to catch secrets       |
 
 ---
 

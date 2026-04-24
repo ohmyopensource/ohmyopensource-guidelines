@@ -1,6 +1,30 @@
-# Pull Request Guidelines
+---
+title: Pull Request Guidelines | OhMyOpenSource! Guidelines
+description: Standards for opening, reviewing and merging pull requests across all repositories of the OhMyOpenSource! organization.
+head:
+  - - meta
+    - property: og:title
+      content: Pull Request Guidelines | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn how to write effective pull requests, structure descriptions, and collaborate through code reviews in OhMyOpenSource projects.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/pull-request-guidelines
+  - - meta
+    - name: keywords
+      content: pull request guidelines, PR best practices, code review process, github pull request standards, collaborative development workflow, PR description template, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Pull Request Guidelines | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Best practices for writing, reviewing and merging pull requests in OhMyOpenSource projects.
+---
 
-This document defines the standards for opening, reviewing and merging pull requests across all repositories of the OhMyOpenSource! organization.  
+# OhMyOpenSource! - Pull Request Guidelines
+
+This document defines the standards for opening, reviewing and merging pull requests across all repositories of the OhMyOpenSource! organization.
 Pull requests are the primary medium of collaboration. A well-structured PR communicates intent clearly, speeds up review, and raises the overall quality of the codebase.
 
 ---
@@ -9,7 +33,7 @@ Pull requests are the primary medium of collaboration. A well-structured PR comm
 
 A pull request is more than a code diff. It is a structured opportunity to catch bugs early, share knowledge across the team, and maintain consistent standards. The earlier an issue is identified in the development cycle, the cheaper it is to fix.
 
-Beyond code quality, PRs are a form of living documentation: the description, the discussion and the commit history together tell the story of *why* a change was made, a story that is often more valuable than the change itself.
+Beyond code quality, PRs are a form of living documentation: the description, the discussion and the commit history together tell the story of _why_ a change was made, a story that is often more valuable than the change itself.
 
 ---
 
@@ -24,7 +48,7 @@ Before submitting a pull request for review, the author is responsible for:
 - Verifying that no secrets, credentials or environment-specific values have been accidentally committed
 - Confirming that the PR addresses a single, well-defined task
 
-> A PR that has not passed these checks should not be submitted for review.  
+> A PR that has not passed these checks should not be submitted for review.
 > Use a **draft PR** to share work in progress and gather early feedback without requesting a formal review.
 
 ---
@@ -33,17 +57,18 @@ Before submitting a pull request for review, the author is responsible for:
 
 Keep pull requests small and focused. A PR that is too large is difficult to review thoroughly and increases the risk of introducing regressions.
 
-| Lines changed | Assessment |
-|---|---|
-| < 200 | Ideal |
-| 200 - 400 | Acceptable |
-| > 400 | Consider splitting into multiple PRs |
+| Lines changed | Assessment                           |
+| ------------- | ------------------------------------ |
+| < 200         | Ideal                                |
+| 200 - 400     | Acceptable                           |
+| > 400         | Consider splitting into multiple PRs |
 
 These are guidelines, not hard limits. A large refactor or a migration may legitimately exceed 400 lines, in those cases, provide extra context in the description.
 
 If a feature is too large to fit in a single PR, break it down into a sequence of smaller ones. Each PR in the sequence should be independently mergeable and leave the codebase in a working state.
 
 **Example of a feature broken into multiple PRs:**
+
 ```
 feat: add base user model and migration
 feat: implement user authentication endpoints
@@ -66,6 +91,7 @@ The title is the first thing a reviewer sees. It should convey the purpose of th
 - Prefix with `WIP:` or open as a **draft** if the PR is not ready for review
 
 **Good titles:**
+
 ```
 feat(auth): add OAuth2 login with Google
 fix(cart): prevent checkout when cart is empty
@@ -74,6 +100,7 @@ docs(api): document rate limiting behavior on /v2/search
 ```
 
 **Poor titles:**
+
 ```
 fix bug
 update files
@@ -89,20 +116,25 @@ Use the following structure as a starting point and adapt it to the complexity o
 
 ```markdown
 ## Problem
+
 <!-- What issue does this PR address? Link to the relevant issue or ticket. -->
 
 ## Solution
+
 <!-- How was the problem solved? Provide a high-level summary of the approach. -->
 
 ## Changes
-<!-- List the main changes introduced. -->
-- 
-- 
+
+## <!-- List the main changes introduced. -->
+
+-
 
 ## Testing
+
 <!-- How can the reviewer verify the change? Provide steps if applicable. -->
 
 ## Notes
+
 <!-- Anything else the reviewer should know: side effects, open questions,
      related PRs, external references, screenshots. -->
 ```
@@ -140,13 +172,14 @@ The reviewer is responsible for:
 - Verifying that commit messages are meaningful and follow the project conventions
 - Leaving clear, actionable and respectful feedback
 
-The reviewer is **not** responsible for manually testing the feature — that is covered by automated tests and CI. However, checking out the branch locally to explore the change in context is encouraged for complex or high-risk changes.
+The reviewer is **not** responsible for manually testing the feature - that is covered by automated tests and CI. However, checking out the branch locally to explore the change in context is encouraged for complex or high-risk changes.
 
 ### Review Tone
 
 Code review is a collaborative activity. Comments should be constructive, respectful and focused on the code, not the author.
 
 **Preferred approach:**
+
 - Ask questions rather than issuing directives
 - Explain the reasoning behind a suggestion
 - Distinguish between blocking concerns and optional improvements
@@ -154,11 +187,11 @@ Code review is a collaborative activity. Comments should be constructive, respec
 
 **Examples:**
 
-| Instead of | Prefer |
-|---|---|
-| `This is wrong.` | `This approach could cause X in the case of Y — would it make sense to handle it here?` |
-| `Use a map here.` | `A map could improve lookup time here since this runs in a hot path. What do you think?` |
-| `Why did you do it this way?` | `I'm not familiar with this pattern — could you add a comment explaining the intent?` |
+| Instead of                    | Prefer                                                                                   |
+| ----------------------------- | ---------------------------------------------------------------------------------------- |
+| `This is wrong.`              | `This approach could cause X in the case of Y - would it make sense to handle it here?`  |
+| `Use a map here.`             | `A map could improve lookup time here since this runs in a hot path. What do you think?` |
+| `Why did you do it this way?` | `I'm not familiar with this pattern - could you add a comment explaining the intent?`    |
 
 ### What to Look For
 
@@ -173,11 +206,11 @@ Beyond correctness, reviewers should evaluate:
 
 ### Review Decisions
 
-| Decision | When to use |
-|---|---|
-| **Approve** | The change is ready to merge as-is, or after minor non-blocking fixes |
-| **Request changes** | There are concerns that must be addressed before merging |
-| **Comment** | Feedback is provided but a formal decision is deferred |
+| Decision            | When to use                                                           |
+| ------------------- | --------------------------------------------------------------------- |
+| **Approve**         | The change is ready to merge as-is, or after minor non-blocking fixes |
+| **Request changes** | There are concerns that must be addressed before merging              |
+| **Comment**         | Feedback is provided but a formal decision is deferred                |
 
 When requesting changes, state clearly what is blocking and why. Avoid leaving a PR in a blocked state without actionable next steps.
 
@@ -215,25 +248,30 @@ Once a PR is merged:
 
 ```markdown
 ## Problem
+
 Users are being charged twice when a network timeout occurs during the payment step.
 Closes #412
 
 ## Solution
+
 Added an idempotency check before retrying the payment request.
 The service now verifies whether the original transaction was already processed
 before issuing a new charge.
 
 ## Changes
+
 - Added `isTransactionComplete()` check in `PaymentService`
 - Extended the payment session model with a `transactionId` field
 - Added unit tests for the retry logic under network failure conditions
 
 ## Testing
+
 1. Simulate a network timeout during checkout
 2. Verify that only one charge appears in the payment provider dashboard
 3. Run `npm test -- --testPathPattern=payment`
 
 ## Notes
+
 This fix does not address the UX during the timeout (spinner stays indefinitely).
 Tracked separately in #418.
 ```
@@ -242,11 +280,13 @@ Tracked separately in #418.
 
 ```markdown
 ## Problem
+
 The cart checkout button is active even when the cart is empty, allowing users
 to submit an order with no items.
 Closes #389
 
 ## Solution
+
 Added a disabled state to the checkout button when `cart.items.length === 0`.
 ```
 
@@ -260,6 +300,6 @@ fixed the bug
 
 ## References
 
-- [GitHub Docs — Creating a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-- [The Comprehensive Guide to Pull Requests — Holger Frohloff](https://holgerfrohloff.de/2024/01/24/the-comprehensive-guide.html)
-- [Pull Request Etiquette — BigPanda Engineering](https://medium.com/bigpanda-engineering/pull-request-etiquette-d53cfb035c20)
+- [GitHub Docs - Creating a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+- [The Comprehensive Guide to Pull Requests - Holger Frohloff](https://holgerfrohloff.de/2024/01/24/the-comprehensive-guide.html)
+- [Pull Request Etiquette - BigPanda Engineering](https://medium.com/bigpanda-engineering/pull-request-etiquette-d53cfb035c20)

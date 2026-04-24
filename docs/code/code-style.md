@@ -1,8 +1,32 @@
-# Code Style
+---
+title: Code Style | OhMyOpenSource! Guidelines
+description: Code style guidelines for OhMyOpenSource projects, including formatting standards, linters, automation practices, and principles for writing clean and consistent code.
+head:
+  - - meta
+    - property: og:title
+      content: Code Style | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn the code style standards for OhMyOpenSource projects, including linters, formatters, and best practices for maintainable code.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/code-style
+  - - meta
+    - name: keywords
+      content: code style guidelines, coding standards, linting and formatting, google style guide, clean code principles, developer best practices, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Code Style | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Code style standards and best practices for OhMyOpenSource projects.
+---
+
+# OhMyOpenSource! - Code Style
 
 This document defines the code style standards adopted across all repositories of the OhMyOpenSource! organization.
 
-Consistent code style is not about aesthetics — it is about reducing cognitive overhead. When every contributor writes code that looks the same, reviewers can focus on logic and correctness rather than formatting. Onboarding is faster. Diffs are cleaner. Maintenance is easier.
+Consistent code style is not about aesthetics - it is about reducing cognitive overhead. When every contributor writes code that looks the same, reviewers can focus on logic and correctness rather than formatting. Onboarding is faster. Diffs are cleaner. Maintenance is easier.
 
 > Style discussions should never happen in code review. If a linter enforces it, it is not up for debate. If a linter does not enforce it, it is either a project-level decision or a matter of personal preference that should not block a PR.
 
@@ -14,21 +38,21 @@ The primary style reference for all OhMyOpenSource! projects is the **Google Sty
 
 These guides are not mandatory reading for every contributor on every project, but they are the authoritative reference when a style decision needs to be made. If a project's linter configuration aligns with the Google style guide for that language, no further discussion is needed.
 
-| Language | Google Style Guide |
-|---|---|
-| JavaScript | https://google.github.io/styleguide/jsguide.html |
-| TypeScript | https://google.github.io/styleguide/tsguide.html |
-| Python | https://google.github.io/styleguide/pyguide.html |
-| Java | https://google.github.io/styleguide/javaguide.html |
-| Go | https://google.github.io/styleguide/go/ |
-| C++ | https://google.github.io/styleguide/cppguide.html |
-| C# | https://google.github.io/styleguide/csharp-style.html |
-| HTML/CSS | https://google.github.io/styleguide/htmlcssguide.html |
-| Shell | https://google.github.io/styleguide/shellguide.html |
-| Swift | https://google.github.io/swift/ |
-| Objective-C | https://google.github.io/styleguide/objcguide.html |
-| R | https://google.github.io/styleguide/Rguide.html |
-| Markdown | https://google.github.io/styleguide/docguide/style.html |
+| Language    | Google Style Guide                                      |
+| ----------- | ------------------------------------------------------- |
+| JavaScript  | https://google.github.io/styleguide/jsguide.html        |
+| TypeScript  | https://google.github.io/styleguide/tsguide.html        |
+| Python      | https://google.github.io/styleguide/pyguide.html        |
+| Java        | https://google.github.io/styleguide/javaguide.html      |
+| Go          | https://google.github.io/styleguide/go/                 |
+| C++         | https://google.github.io/styleguide/cppguide.html       |
+| C#          | https://google.github.io/styleguide/csharp-style.html   |
+| HTML/CSS    | https://google.github.io/styleguide/htmlcssguide.html   |
+| Shell       | https://google.github.io/styleguide/shellguide.html     |
+| Swift       | https://google.github.io/swift/                         |
+| Objective-C | https://google.github.io/styleguide/objcguide.html      |
+| R           | https://google.github.io/styleguide/Rguide.html         |
+| Markdown    | https://google.github.io/styleguide/docguide/style.html |
 
 Using the Google style guide as the default does not prevent a project from making deliberate, documented exceptions. However, deviations should be explicit, configured in the linter, not left as unwritten conventions.
 
@@ -53,17 +77,17 @@ If a style issue reaches a PR, it means the local tooling was not set up correct
 
 The following tools are recommended per language. Each project must document its chosen tools and configuration in its own `CONTRIBUTING.md` or `README.md`.
 
-| Language | Formatter | Linter |
-|---|---|---|
-| JavaScript / TypeScript | Prettier | ESLint |
-| Python | Black | Flake8 / Ruff |
-| Go | `gofmt` / `goimports` | `golangci-lint` |
-| Java | google-java-format | Checkstyle |
-| C / C++ | clang-format | clang-tidy |
-| C# | dotnet-format | Roslyn Analyzers |
-| Shell | shfmt | ShellCheck |
-| CSS / SCSS | Prettier | Stylelint |
-| Markdown | Prettier | markdownlint |
+| Language                | Formatter             | Linter           |
+| ----------------------- | --------------------- | ---------------- |
+| JavaScript / TypeScript | Prettier              | ESLint           |
+| Python                  | Black                 | Flake8 / Ruff    |
+| Go                      | `gofmt` / `goimports` | `golangci-lint`  |
+| Java                    | google-java-format    | Checkstyle       |
+| C / C++                 | clang-format          | clang-tidy       |
+| C#                      | dotnet-format         | Roslyn Analyzers |
+| Shell                   | shfmt                 | ShellCheck       |
+| CSS / SCSS              | Prettier              | Stylelint        |
+| Markdown                | Prettier              | markdownlint     |
 
 Configuration files for linters and formatters must be committed to the repository (e.g. `.eslintrc`, `.prettierrc`, `pyproject.toml`, `.clang-format`) so that all contributors use identical settings.
 
@@ -78,12 +102,14 @@ Linting and formatting must run locally before a commit is created. This prevent
 [pre-commit](https://pre-commit.com/) is a framework for managing and running Git hooks. It supports hooks for almost every language and integrates with most formatters and linters.
 
 **Setup:**
+
 ```bash
 pip install pre-commit
 pre-commit install
 ```
 
 **Example `.pre-commit-config.yaml`:**
+
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -113,6 +139,7 @@ repos:
 ```
 
 Run hooks manually on all files:
+
 ```bash
 pre-commit run --all-files
 ```
@@ -122,27 +149,25 @@ pre-commit run --all-files
 [Husky](https://typicode.github.io/husky/) manages Git hooks for Node.js projects. Combined with [lint-staged](https://github.com/lint-staged/lint-staged), it runs linters only on staged files, making the hook fast even in large repositories.
 
 **Setup:**
+
 ```bash
 npm install --save-dev husky lint-staged
 npx husky init
 ```
 
 **`package.json`:**
+
 ```json
 {
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{css,scss,md,json,yaml}": [
-      "prettier --write"
-    ]
+    "*.{js,ts,jsx,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{css,scss,md,json,yaml}": ["prettier --write"]
   }
 }
 ```
 
 **`.husky/pre-commit`:**
+
 ```bash
 #!/bin/sh
 npx lint-staged
@@ -200,7 +225,7 @@ The following rules apply to all projects, regardless of language, and are not n
 - **No trailing whitespace**: enforced by the pre-commit hook
 - **Files end with a newline**: enforced by the pre-commit hook
 - **No commented-out code**: dead code should be deleted, not commented out. If it might be needed again, Git history preserves it
-- **No `TODO` without a linked issue**: a `TODO` comment must reference a GitHub issue: `// TODO: #214 — handle null session`
+- **No `TODO` without a linked issue**: a `TODO` comment must reference a GitHub issue: `// TODO: #214 - handle null session`
 - **One logical concept per file**: avoid files that do too many unrelated things
 
 ---
@@ -211,7 +236,7 @@ Some style choices cannot be enforced by a tool. These are principles, not rules
 
 **Clarity over cleverness.** Code is read far more often than it is written. A solution that is slightly less elegant but immediately understandable is almost always preferable to a clever one that requires study.
 
-**Names should tell the truth.** A variable named `data` or `temp` communicates nothing. A function named `processItems` is vague. Names should describe *what a thing is* or *what a function does*, precisely enough that a reader does not need to look at its implementation to understand how to use it.
+**Names should tell the truth.** A variable named `data` or `temp` communicates nothing. A function named `processItems` is vague. Names should describe _what a thing is_ or _what a function does_, precisely enough that a reader does not need to look at its implementation to understand how to use it.
 
 **Functions should do one thing.** A function that handles input validation, business logic and database persistence is three functions. Short, focused functions are easier to test, easier to name, and easier to understand.
 

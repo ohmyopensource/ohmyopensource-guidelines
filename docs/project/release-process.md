@@ -1,10 +1,34 @@
-# Release Process
+---
+title: Release Process | OhMyOpenSource! Guidelines
+description: Standardized process for preparing, publishing and communicating releases across OhMyOpenSource repositories, including versioning, changelog management and GitHub releases.
+head:
+  - - meta
+    - property: og:title
+      content: Release Process | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn how to prepare, tag and publish releases, manage changelogs and handle hotfixes in OhMyOpenSource projects.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/release-process
+  - - meta
+    - name: keywords
+      content: release process, github releases, semantic versioning workflow, changelog management, release branch strategy, hotfix process, semantic release automation, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Release Process | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Best practices for managing releases, versioning, changelogs and deployment workflows in OhMyOpenSource projects.
+---
+
+# OhMyOpenSource! - Release Process
 
 This document defines the process for preparing, publishing and communicating releases across all repositories of the OhMyOpenSource! organization.
 
 A release is a deliberate, documented event, not just a merge to `main`. It marks a specific, stable point in the project's history that consumers can depend on, reference and roll back to if necessary. A consistent release process ensures that every release is reproducible, traceable and communicated clearly.
 
-This document complements [versioning.md](versioning.md) (which defines *how* versions are numbered) and [branching-strategy.md](../git/branching-strategy.md) (which defines *where* releases live in the branch model).
+This document complements [versioning.md](versioning.md) (which defines _how_ versions are numbered) and [branching-strategy.md](../git/branching-strategy.md) (which defines _where_ releases live in the branch model).
 
 ---
 
@@ -83,17 +107,20 @@ git commit -am "build(release): bump version to 1.5.0"
 Add a new entry at the top of `CHANGELOG.md` for the release being prepared. Follow the [Keep a Changelog](https://keepachangelog.com/) format:
 
 ```markdown
-## [1.5.0] — 2025-11-01
+## [1.5.0] - 2025-11-01
 
 ### Added
+
 - Email notifications on new direct messages (#301)
 - Pagination on the /users endpoint (#289)
 
 ### Fixed
+
 - Checkout button remains active when cart is empty (#389)
 - Session token not invalidated on password change (#402)
 
 ### Changed
+
 - Default page size for paginated endpoints changed from 50 to 20
 ```
 
@@ -148,7 +175,7 @@ git push origin --delete release/1.5.0
 
 ### Step 8 - Publish the GitHub Release
 
-Create a GitHub Release from the tag. Go to **Releases => Draft a new release** in the repository, or use the GitHub CLI:
+Create a GitHub Release from the tag. Go to **Releases > Draft a new release** in the repository, or use the GitHub CLI:
 
 ```bash
 gh release create v1.5.0 \
@@ -158,6 +185,7 @@ gh release create v1.5.0 \
 ```
 
 The GitHub Release must include:
+
 - The version number as the title
 - The full changelog entry for this version as the release notes
 - Any binary artifacts or packages attached, if applicable
@@ -204,9 +232,10 @@ Publish a GitHub Release for hotfixes following the same rules as standard relea
 
 ## Automated Release (Optional)
 
-For projects using `semantic-release`, the entire process above is automated on merge to `main`. See [versioning.md — Automated Versioning](versioning.md#automated-versioning) for configuration details.
+For projects using `semantic-release`, the entire process above is automated on merge to `main`. See [versioning.md - Automated Versioning](versioning.md#automated-versioning) for configuration details.
 
 When `semantic-release` is in use:
+
 - Steps 1–7 above are replaced by the CI pipeline
 - The `CHANGELOG.md` is generated automatically from commit history
 - The GitHub Release is created automatically with generated release notes
@@ -221,6 +250,7 @@ The only manual steps that remain are the pre-release review (Step 0) and confir
 Every GitHub Release must have release notes that are useful to someone who was not involved in writing the code.
 
 Good release notes:
+
 - Describe changes in terms of **user-visible behavior**, not internal implementation
 - Clearly mark **breaking changes** at the top
 - Reference closed issues and merged PRs with `#number` links
@@ -230,13 +260,16 @@ Good release notes:
 ## v1.5.0
 
 ### Breaking changes
+
 - The `/users/list` endpoint has been removed. Use `/users?role=<role>` instead. (#321)
 
 ### New features
+
 - Email notifications are now sent when a new direct message is received. (#301)
 - The `/users` endpoint now supports pagination. Use `?page=N&page_size=20`. (#289)
 
 ### Bug fixes
+
 - The checkout button is now disabled when the cart is empty. (#389)
 - Session tokens are correctly invalidated on password change. (#402)
 ```

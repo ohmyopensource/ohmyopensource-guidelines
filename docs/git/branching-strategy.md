@@ -1,6 +1,30 @@
-# Branching Strategy
+---
+title: Branching Strategy | OhMyOpenSource! Guidelines
+description: Branching strategy guidelines for OhMyOpenSource projects based on GitFlow, including branch types, workflows, naming conventions, and versioning practices.
+head:
+  - - meta
+    - property: og:title
+      content: Branching Strategy | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn the GitFlow-based branching strategy used in OhMyOpenSource projects, including workflows, branch types, and best practices.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/branching-strategy
+  - - meta
+    - name: keywords
+      content: gitflow branching strategy, git branching model, feature branch workflow, release branch, hotfix branch, semantic versioning, git best practices, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Branching Strategy | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: GitFlow-based branching strategy and workflows for OhMyOpenSource projects.
+---
 
-This document defines the branching model adopted across all repositories of the OhMyOpenSource! organization.  
+# OhMyOpenSource! - Branching Strategy
+
+This document defines the branching model adopted across all repositories of the OhMyOpenSource! organization.
 A consistent branching strategy is the foundation of a stable, collaborative and predictable development process. It determines how work is organized, how code moves toward production, and how teams can collaborate in parallel without stepping on each other.
 
 ---
@@ -49,13 +73,13 @@ These branches are never deleted. They represent the current state of the codeba
 
 > Think of `develop` as the staging area for the next release. It is where the team's work comes together before it is promoted toward production.
 
-### `staging` *(optional)*
+### `staging` _(optional)_
 
 Some projects introduce a `staging` branch between `develop` and `main` to represent a **pre-production environment**: a deployed instance that mirrors production as closely as possible and is used for final validation before a release.
 
 - `staging` is fed from `release/` branches during the release preparation phase
 - It is useful when the team needs a stable environment for QA, user acceptance testing or external stakeholder review
-- Not all projects require this branch — its introduction should be a deliberate decision documented in the project
+- Not all projects require this branch - its introduction should be a deliberate decision documented in the project
 
 ---
 
@@ -67,12 +91,12 @@ These branches are created for a specific task and deleted once merged. They kee
 
 Used to develop a **new feature** for an upcoming release.
 
-| Property | Value |
-|---|---|
-| Branches from | `develop` |
-| Merges into | `develop` |
-| Naming | `feature/<short-description>` |
-| Lifetime | Until the feature is complete and merged |
+| Property      | Value                                    |
+| ------------- | ---------------------------------------- |
+| Branches from | `develop`                                |
+| Merges into   | `develop`                                |
+| Naming        | `feature/<short-description>`            |
+| Lifetime      | Until the feature is complete and merged |
 
 ```bash
 git checkout develop
@@ -85,6 +109,7 @@ git push origin feature/user-avatar-upload
 Keep feature branches short-lived. A branch that lives for weeks tends to accumulate merge conflicts and becomes harder to review. If a feature is large, break it into smaller incremental branches.
 
 **Examples:**
+
 ```
 feature/oauth2-login
 feature/dark-mode-toggle
@@ -95,12 +120,12 @@ feature/search-results-pagination
 
 Used to fix a bug discovered **during development**, before a release.
 
-| Property | Value |
-|---|---|
-| Branches from | `develop` |
-| Merges into | `develop` |
-| Naming | `fix/<short-description>` |
-| Lifetime | Until the fix is merged |
+| Property      | Value                     |
+| ------------- | ------------------------- |
+| Branches from | `develop`                 |
+| Merges into   | `develop`                 |
+| Naming        | `fix/<short-description>` |
+| Lifetime      | Until the fix is merged   |
 
 ```bash
 git checkout develop
@@ -108,6 +133,7 @@ git checkout -b fix/login-redirect-loop
 ```
 
 **Examples:**
+
 ```
 fix/empty-cart-checkout
 fix/avatar-upload-mime-validation
@@ -120,12 +146,12 @@ fix/dashboard-chart-rendering
 
 Used to **prepare a new production release**. Once a set of features on `develop` is considered complete and stable, a release branch is opened to finalize the release.
 
-| Property | Value |
-|---|---|
-| Branches from | `develop` |
-| Merges into | `main` **and** `develop` |
-| Naming | `release/<version>` e.g. `release/2.3.0` |
-| Lifetime | Until the release is tagged and deployed |
+| Property      | Value                                    |
+| ------------- | ---------------------------------------- |
+| Branches from | `develop`                                |
+| Merges into   | `main` **and** `develop`                 |
+| Naming        | `release/<version>` e.g. `release/2.3.0` |
+| Lifetime      | Until the release is tagged and deployed |
 
 A release branch allows the team to perform final checks, bump the version number, update the changelog and apply last-minute minor fixes, all without blocking the ongoing development on `develop`.
 
@@ -147,12 +173,12 @@ No new features are added to a release branch. Only bug fixes, version bumps and
 
 Used to **fix a critical bug in production** that cannot wait for the next planned release.
 
-| Property | Value |
-|---|---|
-| Branches from | `main` |
-| Merges into | `main` **and** `develop` |
-| Naming | `hotfix/<short-description>` or `hotfix/<version>` |
-| Lifetime | Until the fix is deployed and merged back |
+| Property      | Value                                              |
+| ------------- | -------------------------------------------------- |
+| Branches from | `main`                                             |
+| Merges into   | `main` **and** `develop`                           |
+| Naming        | `hotfix/<short-description>` or `hotfix/<version>` |
+| Lifetime      | Until the fix is deployed and merged back          |
 
 ```bash
 git checkout main
@@ -172,14 +198,15 @@ git branch -d hotfix/payment-double-charge
 
 ## Branch Naming Conventions
 
-| Branch type | Pattern | Examples |
-|---|---|---|
-| Feature | `feature/<short-description>` | `feature/stripe-integration`, `feature/user-roles` |
-| Bug fix (dev) | `fix/<short-description>` | `fix/session-expiry`, `fix/null-pointer-checkout` |
-| Release | `release/<version>` | `release/1.4.0`, `release/2.0.0-beta` |
-| Hotfix | `hotfix/<short-description>` | `hotfix/csrf-token`, `hotfix/critical-data-loss` |
+| Branch type   | Pattern                       | Examples                                           |
+| ------------- | ----------------------------- | -------------------------------------------------- |
+| Feature       | `feature/<short-description>` | `feature/stripe-integration`, `feature/user-roles` |
+| Bug fix (dev) | `fix/<short-description>`     | `fix/session-expiry`, `fix/null-pointer-checkout`  |
+| Release       | `release/<version>`           | `release/1.4.0`, `release/2.0.0-beta`              |
+| Hotfix        | `hotfix/<short-description>`  | `hotfix/csrf-token`, `hotfix/critical-data-loss`   |
 
 Rules:
+
 - Use **lowercase** and **hyphens** only - no underscores, no camelCase, no spaces
 - Keep names **short and descriptive** - the branch name should give a clear idea of its purpose at a glance
 - Do not use personal names or cryptic identifiers (`feature/johns-stuff`, `feature/xyz123`)
@@ -190,21 +217,25 @@ Rules:
 ## Branch Overview
 
 **Permanent branches:**
+
 - `main`: reflects the current production state. Receives merges from `release/` and `hotfix/` only.
 - `develop`: integration branch for the next release. Receives merges from `feature/` and `fix/` only.
-- `staging` *(optional)*: pre-production environment, fed from `release/` branches for final validation.
+- `staging` _(optional)_: pre-production environment, fed from `release/` branches for final validation.
 
 **Temporary branches:**
+
 - `feature/*`: branches from `develop`, merges back into `develop`
 - `fix/*`: branches from `develop`, merges back into `develop`
 - `release/*`: branches from `develop`, merges into `main` and `develop`
 - `hotfix/*`: branches from `main`, merges into `main` and `develop`
 
 **Development flow:**
-- `develop` => `feature/*` => PR => `develop` => `release/*` => `main`
+
+- `develop` > `feature/*` > PR > `develop` > `release/*` > `main`
 
 **Hotfix flow:**
-- `main` => `hotfix/*` => PR => `main` + `develop`
+
+- `main` > `hotfix/*` > PR > `main` + `develop`
 
 ---
 
@@ -212,13 +243,14 @@ Rules:
 
 All releases follow [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
 
-| Change type | Version bump | Example |
-|---|---|---|
-| Breaking change | Major | `1.4.2` → `2.0.0` |
-| New feature (non-breaking) | Minor | `1.4.2` → `1.5.0` |
-| Bug fix or patch | Patch | `1.4.2` → `1.4.3` |
+| Change type                | Version bump | Example           |
+| -------------------------- | ------------ | ----------------- |
+| Breaking change            | Major        | `1.4.2` → `2.0.0` |
+| New feature (non-breaking) | Minor        | `1.4.2` → `1.5.0` |
+| Bug fix or patch           | Patch        | `1.4.2` → `1.4.3` |
 
 Every merge into `main` must be tagged:
+
 ```bash
 git tag -a v2.3.0 -m "build(release): v2.3.0"
 git push origin v2.3.0
@@ -244,6 +276,7 @@ These protections are enforced at the repository level via GitHub branch protect
 The following example walks through a typical development cycle from feature to production.
 
 **1. A developer starts a new feature:**
+
 ```bash
 git checkout develop
 git pull origin develop
@@ -251,6 +284,7 @@ git checkout -b feature/email-notifications
 ```
 
 **2. Work is done and pushed:**
+
 ```bash
 git add .
 git commit -m "feat(notifications): add email alert on new direct message"
@@ -260,6 +294,7 @@ git push origin feature/email-notifications
 **3. A pull request is opened** targeting `develop`. After review and approval, it is merged.
 
 **4. When enough features are ready, a release branch is cut:**
+
 ```bash
 git checkout develop
 git pull origin develop
@@ -269,6 +304,7 @@ git commit -m "build(release): bump version to 1.5.0"
 ```
 
 **5. Final checks pass. The release is merged into `main` and tagged:**
+
 ```bash
 git checkout main
 git merge --no-ff release/1.5.0
@@ -277,6 +313,7 @@ git push origin main --tags
 ```
 
 **6. The release is also merged back into `develop`:**
+
 ```bash
 git checkout develop
 git merge --no-ff release/1.5.0
@@ -285,6 +322,7 @@ git branch -d release/1.5.0
 ```
 
 **7. A critical bug is discovered in production:**
+
 ```bash
 git checkout main
 git pull origin main
@@ -303,20 +341,20 @@ git branch -d hotfix/login-token-expiry
 
 ## Quick Reference
 
-| Branch | Purpose | Branches from | Merges into | Protected |
-|---|---|---|---|---|
-| `main` | Production code | — | — | Yes |
-| `develop` | Integration / next release | — | — | Yes |
-| `staging` | Pre-production validation | `release/` | — | Optional |
-| `feature/*` | New feature development | `develop` | `develop` | No |
-| `fix/*` | Bug fix during development | `develop` | `develop` | No |
-| `release/*` | Release preparation | `develop` | `main` + `develop` | No |
-| `hotfix/*` | Critical production fix | `main` | `main` + `develop` | No |
+| Branch      | Purpose                    | Branches from | Merges into        | Protected |
+| ----------- | -------------------------- | ------------- | ------------------ | --------- |
+| `main`      | Production code            | -             | -                  | Yes       |
+| `develop`   | Integration / next release | -             | -                  | Yes       |
+| `staging`   | Pre-production validation  | `release/`    | -                  | Optional  |
+| `feature/*` | New feature development    | `develop`     | `develop`          | No        |
+| `fix/*`     | Bug fix during development | `develop`     | `develop`          | No        |
+| `release/*` | Release preparation        | `develop`     | `main` + `develop` | No        |
+| `hotfix/*`  | Critical production fix    | `main`        | `main` + `develop` | No        |
 
 ---
 
 ## References
 
-- [A Successful Git Branching Model — Vincent Driessen (nvie.com)](https://nvie.com/posts/a-successful-git-branching-model/)
-- [Gitflow Workflow — Atlassian](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
-- [Git Branching — Branching Workflows (git-scm.com)](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows)
+- [A Successful Git Branching Model - Vincent Driessen (nvie.com)](https://nvie.com/posts/a-successful-git-branching-model/)
+- [Gitflow Workflow - Atlassian](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+- [Git Branching - Branching Workflows (git-scm.com)](https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows)

@@ -1,4 +1,28 @@
-# Dependency Policy
+---
+title: Dependency Policy | OhMyOpenSource! Guidelines
+description: Rules and best practices for managing third-party dependencies across OhMyOpenSource projects, including security, version pinning, licensing, and update policies.
+head:
+  - - meta
+    - property: og:title
+      content: Dependency Policy | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn how OhMyOpenSource manages third-party dependencies with strict rules on security, licensing, versioning, and updates.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/dependency-policy
+  - - meta
+    - name: keywords
+      content: dependency management, software supply chain, npm dependencies policy, pip dependencies, security vulnerabilities dependencies, license compliance, dependabot, dependency review github, version pinning, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Dependency Policy | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Guidelines for secure and controlled dependency management across all OhMyOpenSource repositories.
+---
+
+# OhMyOpenSource! - Dependency Policy
 
 This document defines the rules and best practices for managing third-party dependencies across all repositories of the OhMyOpenSource! organization.
 
@@ -8,7 +32,7 @@ Dependencies are a fundamental part of modern software, but every dependency add
 
 ## Why Dependency Management Matters
 
-The software supply chain is one of the most frequent attack vectors in modern development. Vulnerabilities do not only come from code written in-house, they come from the packages that code depends on, and from the packages that *those* packages depend on. A single outdated or malicious transitive dependency can compromise an entire application.
+The software supply chain is one of the most frequent attack vectors in modern development. Vulnerabilities do not only come from code written in-house, they come from the packages that code depends on, and from the packages that _those_ packages depend on. A single outdated or malicious transitive dependency can compromise an entire application.
 
 Beyond security, dependencies carry licensing obligations. Using a package with a license incompatible with the project's license, or with the organization's redistribution model, can create legal exposure.
 
@@ -45,11 +69,11 @@ When in doubt, open a discussion before adding the dependency.
 
 Dependencies must be pinned to a **specific version** or a **constrained version range** in the project's manifest file. Unpinned dependencies (`latest`, `*`, or no version constraint) are not allowed in production code.
 
-| Acceptable | Not acceptable |
-|---|---|
-| `"lodash": "4.17.21"` | `"lodash": "latest"` |
-| `"express": "^4.18.0"` | `"express": "*"` |
-| `numpy==1.26.4` | `numpy` (no version) |
+| Acceptable             | Not acceptable       |
+| ---------------------- | -------------------- |
+| `"lodash": "4.17.21"`  | `"lodash": "latest"` |
+| `"express": "^4.18.0"` | `"express": "*"`     |
+| `numpy==1.26.4`        | `numpy` (no version) |
 
 Using a lockfile (`package-lock.json`, `yarn.lock`, `Pipfile.lock`, `poetry.lock`, `Cargo.lock`, etc.) is **mandatory** for all projects. Lockfiles must be committed to the repository and kept up to date.
 
@@ -62,6 +86,7 @@ Lockfiles guarantee that every developer, every CI run and every deployment uses
 Dependencies must not be left to grow stale. Outdated packages accumulate unpatched vulnerabilities and make future upgrades harder.
 
 **Expected cadence:**
+
 - Security updates: addressed **within the week** of notification, based on severity
 - Non-security updates: reviewed and applied **at least once per month**
 - Major version upgrades: evaluated and planned per project release cycle
@@ -82,12 +107,12 @@ Dependabot PRs must not be ignored or left open indefinitely. The expected respo
 
 When a vulnerability is reported in a dependency, whether via Dependabot, a security advisory, or a manual audit, the response depends on severity:
 
-| Severity | Expected response time |
-|---|---|
-| Critical | Within 24 hours |
-| High | Within 3 days |
-| Medium | Within 2 weeks |
-| Low | Next regular update cycle |
+| Severity | Expected response time    |
+| -------- | ------------------------- |
+| Critical | Within 24 hours           |
+| High     | Within 3 days             |
+| Medium   | Within 2 weeks            |
+| Low      | Next regular update cycle |
 
 For each vulnerability, the options are:
 
@@ -105,6 +130,7 @@ Vulnerabilities must never be silently ignored. If a decision is made to defer r
 Every dependency carries a license that governs how it may be used, modified and distributed. Before adding a dependency, verify that its license is compatible with the project.
 
 **Allowed licenses** (permissive, safe for most use cases):
+
 - MIT
 - Apache 2.0
 - BSD 2-Clause / BSD 3-Clause
@@ -112,11 +138,13 @@ Every dependency carries a license that governs how it may be used, modified and
 - CC0
 
 **Licenses requiring evaluation** (may impose conditions on distribution or derivative works):
+
 - LGPL (any version): generally usable as a runtime dependency; check carefully for static linking
 - MPL 2.0: file-level copyleft; generally compatible with proprietary code if files are kept separate
 - CC BY: attribution required; check for version and specific terms
 
 **Not allowed** without explicit approval from the organization:
+
 - GPL (any version): copyleft; may require releasing the entire project under GPL
 - AGPL: network copyleft; may require releasing source for software offered as a service
 - Proprietary / "All rights reserved": no redistribution rights
@@ -137,13 +165,13 @@ Enable it by adding a `.github/dependabot.yml` configuration file:
 ```yaml
 version: 2
 updates:
-  - package-ecosystem: "npm"          # adjust to your ecosystem
-    directory: "/"
+  - package-ecosystem: 'npm' # adjust to your ecosystem
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     open-pull-requests-limit: 10
     labels:
-      - "dependencies"
+      - 'dependencies'
 ```
 
 Common `package-ecosystem` values: `npm`, `pip`, `bundler`, `cargo`, `composer`, `maven`, `gradle`, `gomod`, `docker`, `github-actions`.
@@ -152,7 +180,7 @@ Common `package-ecosystem` values: `npm`, `pip`, `bundler`, `cargo`, `composer`,
 
 GitHub's **Dependency Graph** provides a complete view of the direct and transitive dependencies of a repository, as well as which repositories depend on it. It is the foundation for Dependabot alerts and dependency review.
 
-Enable it under **Settings => Security & analysis => Dependency graph**.
+Enable it under **Settings > Security & analysis > Dependency graph**.
 
 ### Dependency Review
 
@@ -218,16 +246,16 @@ vendor/
 
 ## Summary
 
-| Rule | Requirement |
-|---|---|
-| Justify every dependency | Required before adding |
-| Pin versions | Mandatory - no `latest` or `*` |
-| Commit lockfiles | Mandatory |
-| Enable Dependabot | Mandatory on all repositories |
-| Enable Dependency Review in CI | Mandatory |
-| Address security alerts | Within defined SLA by severity |
-| Check licenses before adding | Mandatory |
-| Do not commit `node_modules` or equivalent | Never |
+| Rule                                       | Requirement                    |
+| ------------------------------------------ | ------------------------------ |
+| Justify every dependency                   | Required before adding         |
+| Pin versions                               | Mandatory - no `latest` or `*` |
+| Commit lockfiles                           | Mandatory                      |
+| Enable Dependabot                          | Mandatory on all repositories  |
+| Enable Dependency Review in CI             | Mandatory                      |
+| Address security alerts                    | Within defined SLA by severity |
+| Check licenses before adding               | Mandatory                      |
+| Do not commit `node_modules` or equivalent | Never                          |
 
 ---
 

@@ -1,4 +1,28 @@
-# Documentation
+---
+title: Documentation | OhMyOpenSource! Guidelines
+description: Documentation guidelines for OhMyOpenSource projects, including standards for README, API docs, docstrings, changelogs, and Markdown best practices.
+head:
+  - - meta
+    - property: og:title
+      content: Documentation | OhMyOpenSource! Guidelines
+  - - meta
+    - property: og:description
+      content: Learn how to write and maintain high-quality documentation in OhMyOpenSource projects, including README, API docs, and Markdown standards.
+  - - meta
+    - property: og:url
+      content: https://guidelines.ohmyopensource.org/guidelines/documentation
+  - - meta
+    - name: keywords
+      content: documentation guidelines, api documentation standards, readme best practices, markdown style guide, docstrings, changelog standards, open source documentation, ohmyopensource guidelines
+  - - meta
+    - name: twitter:title
+      content: Documentation | OhMyOpenSource! Guidelines
+  - - meta
+    - name: twitter:description
+      content: Documentation standards and best practices for OhMyOpenSource projects.
+---
+
+# OhMyOpenSource! - Documentation
 
 This document defines the standards for writing and maintaining documentation across all repositories of the OhMyOpenSource! organization.
 
@@ -16,7 +40,7 @@ Documentation lives at different levels of a project and serves different audien
 
 The first layer of documentation lives inside the source code itself. Its audience is developers reading or modifying that code.
 
-**Comments** explain *why* something exists, not *what* it does. Code that requires a comment to explain what it does should be simplified first. Comments are appropriate for:
+**Comments** explain _why_ something exists, not _what_ it does. Code that requires a comment to explain what it does should be simplified first. Comments are appropriate for:
 
 - Complex algorithms or non-obvious logic
 - Workarounds for external bugs or constraints, with a reference
@@ -71,7 +95,7 @@ The docstring style to use depends on the language. For most languages, the **Go
 
 ### README
 
-Every repository must have a `README.md` at its root. The README is the front door of the project — the first thing a new contributor or user sees.
+Every repository must have a `README.md` at its root. The README is the front door of the project - the first thing a new contributor or user sees.
 
 A README must cover, at minimum:
 
@@ -82,7 +106,7 @@ A README must cover, at minimum:
 
 A README should be accurate enough that a contributor with no prior context can get the project running by following it alone. If the README is out of date, update it, do not work around it.
 
-```markdown
+````markdown
 # project-name
 
 One-sentence description of what this project does and why it exists.
@@ -106,7 +130,7 @@ npm test
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
-```
+````
 
 ### CONTRIBUTING.md
 
@@ -126,24 +150,28 @@ Projects with versioned releases must maintain a `CHANGELOG.md` that documents w
 ```markdown
 # Changelog
 
-## [2.3.0] — 2025-10-14
+## [2.3.0] - 2025-10-14
 
 ### Added
+
 - Email notifications for new direct messages
 
 ### Fixed
+
 - Prevent checkout when cart is empty (#389)
 
 ### Changed
+
 - Paginate user list endpoint (returns 20 items per page by default)
 
-## [2.2.1] — 2025-10-02
+## [2.2.1] - 2025-10-02
 
 ### Fixed
+
 - Prevent duplicate charge on payment network timeout (#412)
 ```
 
-The changelog must be updated as part of the release process — not retroactively reconstructed from commit history.
+The changelog must be updated as part of the release process - not retroactively reconstructed from commit history.
 
 ### API Documentation
 
@@ -171,9 +199,9 @@ Content-Type: application/json
 Authorization: Bearer <token>
 
 {
-  "email": "user@example.com",
-  "name": "Jane Doe",
-  "role": "member"
+"email": "user@example.com",
+"name": "Jane Doe",
+"role": "member"
 }
 
 ### Response
@@ -181,20 +209,20 @@ Authorization: Bearer <token>
 201 Created
 
 {
-  "id": "usr_01j8k...",
-  "email": "user@example.com",
-  "name": "Jane Doe",
-  "role": "member",
-  "created_at": "2025-10-14T09:00:00Z"
+"id": "usr_01j8k...",
+"email": "user@example.com",
+"name": "Jane Doe",
+"role": "member",
+"created_at": "2025-10-14T09:00:00Z"
 }
 
 ### Error responses
 
-| Status | Code | Description |
-|---|---|---|
-| 400 | `invalid_email` | The email address is not valid |
-| 409 | `email_taken` | An account with this email already exists |
-| 422 | `missing_field` | A required field is absent |
+| Status | Code            | Description                               |
+| ------ | --------------- | ----------------------------------------- |
+| 400    | `invalid_email` | The email address is not valid            |
+| 409    | `email_taken`   | An account with this email already exists |
+| 422    | `missing_field` | A required field is absent                |
 ```
 
 For REST APIs, consider adopting the **OpenAPI Specification** (formerly Swagger) to maintain machine-readable API documentation that can generate interactive docs automatically.
@@ -231,9 +259,11 @@ Key rules:
 
 ```markdown
 # Don't
+
 See [here](https://very-long-url.example.com/docs/page?ref=something) for details.
 
 # Do
+
 See the [configuration reference][config-ref] for details.
 
 [config-ref]: https://very-long-url.example.com/docs/page?ref=something
@@ -257,14 +287,14 @@ Prefer deleting outdated documentation over updating it incorrectly. Incorrect d
 
 ## Quick Reference
 
-| Documentation type | Location | Required |
-|---|---|---|
-| Code comments | Inline in source | When logic is non-obvious |
-| Docstrings | Every public function / class / module | Mandatory |
-| README | Repository root | Mandatory |
-| CONTRIBUTING.md | Repository root | Mandatory |
-| CHANGELOG.md | Repository root | For versioned projects |
-| API documentation | `docs/` or dedicated doc site | For all public APIs |
+| Documentation type | Location                               | Required                  |
+| ------------------ | -------------------------------------- | ------------------------- |
+| Code comments      | Inline in source                       | When logic is non-obvious |
+| Docstrings         | Every public function / class / module | Mandatory                 |
+| README             | Repository root                        | Mandatory                 |
+| CONTRIBUTING.md    | Repository root                        | Mandatory                 |
+| CHANGELOG.md       | Repository root                        | For versioned projects    |
+| API documentation  | `docs/` or dedicated doc site          | For all public APIs       |
 
 ---
 

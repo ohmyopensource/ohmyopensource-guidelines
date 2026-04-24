@@ -1,0 +1,150 @@
+# ================================
+# OhMyUniversity! - .gitignore
+# ================================
+
+# ================================
+# OS
+# ================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# =========================
+# NODE / JS FILES
+# =========================
+node_modules/
+jspm_packages/
+bower_components/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+build/
+out/
+
+# =========================
+# ENV FILES
+# =========================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# =========================
+# LOG FILES
+# =========================
+logs/
+*.log
+lerna-debug.log*
+
+# =========================
+# IDE - VS CODE
+# =========================
+.vscode/*
+*.code-workspace
+
+# =========================
+# IDE - JETBRAINS
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# =========================
+# MARKDOWN / DOCS (SAFE RULES)
+# =========================
+
+# Temporary or working docs
+*.tmp
+*.tmp.md
+*.draft.md
+*.bak
+*.bak.md
+
+# Exported or generated docs
+docs/_generated/
+docs/build/
+docs/dist/
+
+# VitePress
+docs/.vitepress/dist
+docs/.vitepress/cache
+
+# Mermaid / diagram cache
+*.mmd.tmp
+*.mermaid.cache
+
+# =========================
+# ARCHITECTURE GENERATED ARTIFACTS
+# =========================
+architecture/_generated/
+architecture/build/
+architecture/cache/
+
+# =========================
+# CACHE DIRECTORIES
+# =========================
+.cache/
+.parcel-cache/
+.npm/
+.eslintcache
+.stylelintcache
+.temp/
+tmp/
+
+# =========================
+# TYPESCRIPT
+# =========================
+*.tsbuildinfo
+
+# =========================
+# VITE
+# =========================
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+vitest.config.*.timestamp*
+
+# =========================
+# TEST / DEBUG ARTIFACTS
+# =========================
+coverage/
+*.lcov
+*.coverage
+.nyc_output/
+
+# =========================
+# PACKAGE MANAGER LOCKS
+# =========================
+package-lock.json
+
+# =========================
+# OPTIONAL: LOCAL NOTES (PERSONAL)
+# =========================
+notes/
+scratch/
+*.personal.md
+
+# =========================
+# MISC
+# =========================
+*.pid
+*.seed
+*.pid.lock
+.grunt/
+.lock-wscript
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
