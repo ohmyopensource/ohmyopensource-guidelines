@@ -170,10 +170,10 @@ Commit types determine how the project version is incremented following [Semanti
 
 | Commit contains                          | Version bump      |
 | ---------------------------------------- | ----------------- |
-| `BREAKING CHANGE` (on a `1.x.x` release) | Major → `x+1.0.0` |
-| `BREAKING CHANGE` (on a `0.x.x` release) | Minor → `0.y+1.0` |
-| `feat` or `fix`                          | Minor → `x.y+1.z` |
-| Anything else                            | Patch → `x.y.z+1` |
+| `BREAKING CHANGE` (on a `1.x.x` release) | Major > `x+1.0.0` |
+| `BREAKING CHANGE` (on a `0.x.x` release) | Minor > `0.y+1.0` |
+| `feat` or `fix`                          | Minor > `x.y+1.z` |
+| Anything else                            | Patch > `x.y.z+1` |
 
 ---
 

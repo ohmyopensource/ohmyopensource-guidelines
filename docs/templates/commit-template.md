@@ -50,12 +50,12 @@ git config commit.template .gitmessage
 #   build(release): bump version to 1.5.0
 #
 # ─────────────────────────────────────────────────────────────────────────────
-# BODY (optional — leave a blank line above)
+# BODY (optional - leave a blank line above)
 # Explain the motivation for this change. Describe what changed and why,
 # not how (the code shows how). Wrap at 100 characters.
 #
 # ─────────────────────────────────────────────────────────────────────────────
-# FOOTER (optional — leave a blank line above)
+# FOOTER (optional - leave a blank line above)
 # Reference issues:        Closes #123 / Fixes #456 / Resolves #789
 # Breaking changes:        BREAKING CHANGE: <description of what breaks and how to migrate>
 # Breaking change marker:  Add ! before the colon in the subject line: feat(api)!: ...
@@ -70,10 +70,10 @@ git config commit.template .gitmessage
 
 | Field         | Rule                                                                                                  |
 | ------------- | ----------------------------------------------------------------------------------------------------- |
-| `type`        | Required — one of `feat`, `fix`, `refactor`, `perf`, `style`, `test`, `docs`, `build`, `ops`, `chore` |
-| `scope`       | Optional — the part of the codebase affected                                                          |
+| `type`        | Required - one of `feat`, `fix`, `refactor`, `perf`, `style`, `test`, `docs`, `build`, `ops`, `chore` |
+| `scope`       | Optional - the part of the codebase affected                                                          |
 | `description` | Imperative, present tense, no period, max 100 chars                                                   |
-| `body`        | Optional — explains the _why_, separated by a blank line                                              |
-| `footer`      | Optional — issue references and breaking changes                                                      |
+| `body`        | Optional - explains the _why_, separated by a blank line                                              |
+| `footer`      | Optional - issue references and breaking changes                                                      |
 
 See the full [Commit Conventions](../git/commit-conventions) for detailed rules and examples.

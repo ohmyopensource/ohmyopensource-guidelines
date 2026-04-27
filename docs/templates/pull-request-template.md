@@ -24,7 +24,7 @@ head:
 
 # OhMyOpenSource! - Pull Request Template
 
-This is the `PULL_REQUEST_TEMPLATE.md` used across OhMyOpenSource! repositories. Place it at `.github/PULL_REQUEST_TEMPLATE.md` — GitHub will pre-fill the PR description with this template automatically.
+This is the `PULL_REQUEST_TEMPLATE.md` used across OhMyOpenSource! repositories. Place it at `.github/PULL_REQUEST_TEMPLATE.md` - GitHub will pre-fill the PR description with this template automatically.
 
 See [Pull Request Guidelines](../git/pull-request-guidelines) for the full conventions this template is designed to support.
 

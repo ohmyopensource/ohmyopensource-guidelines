@@ -26,7 +26,7 @@ head:
 
 This section collects ready-to-use templates for the most common collaborative artifacts in an OhMyOpenSource! repository.
 
-Templates are not bureaucracy — they are scaffolding. A good template reduces the cognitive load of starting from a blank page and ensures that the result contains the information that reviewers, maintainers and future readers actually need.
+Templates are not bureaucracy - they are scaffolding. A good template reduces the cognitive load of starting from a blank page and ensures that the result contains the information that reviewers, maintainers and future readers actually need.
 
 All templates in this section are also available in the `.github/` directory of each repository.
 
@@ -54,7 +54,7 @@ An issue template for proposing new features or improvements. Prompts for proble
 
 ## How to Use These Templates
 
-Templates in this documentation site are shown as rendered Markdown for readability. The raw template files — formatted for direct use in a repository — are available in the [`templates/`](https://github.com/ohmyopensource/ohmyopensource-guidelines/tree/main/templates) directory of this repository.
+Templates in this documentation site are shown as rendered Markdown for readability. The raw template files - formatted for direct use in a repository - are available in the [`templates/`](https://github.com/ohmyopensource/ohmyopensource-guidelines/tree/main/templates) directory of this repository.
 
 To add them to a repository, copy the relevant files to:
 

@@ -83,6 +83,10 @@ export default defineConfig({
             text: 'Pull Request Guidelines',
             link: '/git/pull-request-guidelines',
           },
+          {
+            text: 'Contributing Workflow',
+            link: '/git/contributing-workflow',
+          },
         ],
       },
       {
@@ -139,6 +143,10 @@ export default defineConfig({
             {
               text: 'Pull Request Guidelines',
               link: '/git/pull-request-guidelines',
+            },
+            {
+              text: 'Contributing Workflow',
+              link: '/git/contributing-workflow',
             },
           ],
         },

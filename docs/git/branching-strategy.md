@@ -245,9 +245,9 @@ All releases follow [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PAT
 
 | Change type                | Version bump | Example           |
 | -------------------------- | ------------ | ----------------- |
-| Breaking change            | Major        | `1.4.2` → `2.0.0` |
-| New feature (non-breaking) | Minor        | `1.4.2` → `1.5.0` |
-| Bug fix or patch           | Patch        | `1.4.2` → `1.4.3` |
+| Breaking change            | Major        | `1.4.2` > `2.0.0` |
+| New feature (non-breaking) | Minor        | `1.4.2` > `1.5.0` |
+| Bug fix or patch           | Patch        | `1.4.2` > `1.4.3` |
 
 Every merge into `main` must be tagged:
 
